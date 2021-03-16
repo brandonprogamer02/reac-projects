@@ -1,0 +1,4 @@
+CREAMOS EL EL PROYECTO DE REACT CON TYPESCRIPT
+1. ponemos este comando en la carpeta padre de donde queremos que se cree nuestro proyecto:
+npx create-react-app my-app --template typescript
+2.

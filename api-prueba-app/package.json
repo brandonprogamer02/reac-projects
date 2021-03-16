@@ -1,0 +1,17 @@
+{
+  "name": "api-prueba-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "dev":"nodemon ./index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}

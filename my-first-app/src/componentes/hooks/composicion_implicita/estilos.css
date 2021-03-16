@@ -1,0 +1,6 @@
+.children-not-found{
+   background-color: tomato;
+   color: white;
+   padding: 1px 20px;
+   border-radius: 2em;
+}

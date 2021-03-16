@@ -1,0 +1,1 @@
+export {default,ComponentePortal} from './PruebasCss'

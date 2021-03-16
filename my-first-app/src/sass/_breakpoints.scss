@@ -1,0 +1,22 @@
+
+
+
+
+body {
+    * {
+        @media (min-width: map-get($grid-breakpoints , "xs")) {
+            // background-color: red;
+            font-size: x-small;
+        }
+
+        @media (min-width: map-get($grid-breakpoints , "md")) {
+            // background-color: yellow;
+            font-size: small;
+        }
+
+        @media (min-width: map-get($grid-breakpoints , "xl")) {
+            font-size: medium;
+            // background-color: blue;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+.card-parent {
+   border: 2px solid teal;
+   margin: 20px;
+}
+.card-parent * {
+   padding: 10px;
+}

@@ -1,0 +1,40 @@
+@mixin navigation {
+    position: sticky;
+    transition:  .5s ease;
+    background-color: #42bb9a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    height: 100px;
+    top: 50%;
+    z-index: 1;
+    
+    > span {
+        color: white;
+        font-weight: bold;
+        height: 20px;
+        display: none;
+    }
+    &:hover {
+        width: 100px;
+        cursor: pointer;
+        > span {
+            display: block;
+            padding: 0px 10px;
+        }
+    }
+}
+
+.navigation-left {
+    @include navigation;
+    border-radius: 0px 20px 20px 0px;
+    
+}
+
+.navigation-right {
+    @include navigation;
+    left: 100%;
+    border-radius: 20px 0px 0px 20px;
+   
+}

@@ -1,0 +1,13 @@
+
+
+.border-img{
+    border: 10px solid transparent;
+    border-image: url(./resources/border-image.jpg) round;
+    padding: 15px;
+    width: 200px;
+    margin:auto;
+    word-break: keep-all;
+}
+
+
+

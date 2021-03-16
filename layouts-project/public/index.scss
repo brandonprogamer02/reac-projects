@@ -1,0 +1,19 @@
+// SOBREESCRIBIENDO ESTILOS DE BOOTSTRAP
+
+
+
+
+// sobreescribiendo 
+$danger:#F0F2FA;
+$enable-negative-margins: true;
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+@import '../sass/breakpoints';
+@import '../sass/variables';
+@import '../sass/generators';
+
+
+@import '../src/components/SocialMediaDashboard/SocialMediaDashboard';
+@import '../src/components/resources/Navigation/Navigation';
+@import '../src/components/PricingView/PricingView'

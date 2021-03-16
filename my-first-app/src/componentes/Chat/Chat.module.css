@@ -1,0 +1,20 @@
+.card {
+   border: 1px solid black;
+   padding: 35px;
+   height: 300px;
+   width: 30%;
+   overflow: auto;
+   margin: auto;
+}
+.avatar{
+   border-radius: 20px;
+   width: 100px;
+   height: 100px;
+   /* margin: auto; */
+}
+.padre{
+   border: 2px solid black;
+}
+.padre * {
+   text-align: center;
+}

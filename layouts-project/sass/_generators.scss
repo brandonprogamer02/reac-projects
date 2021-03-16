@@ -1,0 +1,48 @@
+
+
+// clase generadora de letter-spacing
+@for $i from 1 through 20 {
+    ._ls-#{$i}{
+        letter-spacing: #{$i}px ;
+    }
+}
+
+// clase generadora de font-size
+@for $i from 1 through 100 {
+    ._fs-#{$i}{
+        font-size: #{$i}px ;
+    }
+}
+
+// clase generadora de border radius
+@for $i from 1 through 100 {
+    .border-radius-#{$i} {
+        border-radius: #{$i}px;
+    }
+}
+
+// clase generadora de backgrounds de redes sociales
+@each $key , $value in $social-media-colors {
+    .bg-#{$key}{
+        background-color: $value;
+    }
+ }
+
+ @each $key , $value in $social-media-colors {
+    .bt-#{$key}{
+        border-top: 4px solid #{$value};
+    }
+ }
+
+ @each $key , $value in $pricing-view-colors {
+     .bg-#{$key} {
+         background: $value;
+     }
+ }
+
+ @each $key , $value in $pricing-view-colors {
+    .color-#{$key} {
+        color: $value;
+    }
+}
+ 

@@ -1,0 +1,50 @@
+.container{
+   display: flex;
+   overflow: auto;
+   /* este es pa la direccion en que se ponente */
+   /* flex-direction: row; */
+   /* este es pa ver si se sale el contenido o no  */
+   /* flex-wrap: wrap; */
+   /* border: 3px solid tomato; */
+   background-color: violet;
+   width: 100%;
+   height: 300px;
+   flex-flow: row wrap ;
+   /* espaciado entre los elementos - alineacion horizontal*/
+   justify-content: space-around;
+   /* alineacion vertical - una sola linea*/
+   /* align-items: center ; */
+   /* alineacion vertical este se usa cuando se tiene que alinear verticalmente varias rows (wrap) */
+   align-content: center ;
+}
+.tools-container{
+   background-color: thistle;
+   width: 25%;
+   height: 100px;
+}
+.quiz-container{
+   width: 420px;
+   height: 100px;
+   background-color: teal;
+}
+.cuadricula{
+   /* flex-grow: 1; */
+   order: 2;
+   /* flex-shrink: 2; */
+   background-color: wheat;
+   margin: 15px 6px;
+   padding: 15px;
+   /* height: 100px; */
+   /* min-width: 50px ; */
+   /* flex-basis: 40px; */
+}
+.tres ~ .cuadricula {
+   background-color: white;
+}
+
+
+.especial {
+   flex-grow: 2;  
+   order: 1;
+   align-self: stretch;
+}

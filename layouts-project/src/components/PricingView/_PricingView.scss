@@ -1,0 +1,35 @@
+.bb-white {
+    border-bottom: 2px solid white;
+}
+
+.fw-bolder {
+    font-weight: bolder;
+}
+
+.trans {
+    transform: scaleY(0.86);
+}
+
+.transition {
+    transition: all 500ms ease;
+}
+
+.svg-top {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+}
+
+.svg-bottom {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+.b-black {
+    border: 3px solid black;
+}
+
+.learn-more:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,35 @@
+.hhh-container {
+    margin-top: -20px;
+    width: 95px;
+    padding: 10px 5px;
+    border-radius: 50px;
+    transform: scale(0.5);
+}
+.hhh-container:hover {
+    cursor: pointer;
+}
+.hhh {
+    background-color: white;
+    width: 50%;
+    height: 40px;
+    transition: 300ms ease;
+    border-radius: 80px;
+    box-shadow: 0px 0px 5px 0.5px grey;
+}
+
+.move-left {
+    transform: translateX(5px);
+}
+
+.move-right {
+    transform: translateX(40px);
+}
+
+.bg-green {
+    background-color: #4cca61;
+    border: none;
+}
+
+.bg-grey {
+    background-color: #d6d6d6;
+}

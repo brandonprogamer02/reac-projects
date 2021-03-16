@@ -1,0 +1,14 @@
+@mixin default-styles($bg-color: red ,$font-size: 16) {
+   background-color: $bg-color;
+   font-size: $font-size;
+   color: white;
+}
+
+p {
+   @include default-styles( $primary, 12);
+   color: blue;
+}
+
+.real-clase {
+   @include default-styles();
+}

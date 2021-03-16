@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+@import '../src/sass/variables';
+@import '../src/sass/mixins';
+@import '../src/sass/nesting';
+@import '../src/sass/global';
+
+
+// components
+@import '../src//componentes//bootstrap/disposicionEjemplo/styles';
+
+/*CAMBIOS PA BOOTSTRAP*/
+// $font-family-sans-serif: 'Yusei Magic', sans-serif;
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+@import '../src/sass/breakpoints';
