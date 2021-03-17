@@ -51,6 +51,8 @@ const SignIn = (props: GlobalState & GlobalDispatch) => {
                props.findUserApi(user._id);
                props.findChatsApi();
                setView(VIEWS.VIEW_LISTA_CHAT.value);
+               console.log('klk');
+               
           }
      }
 
