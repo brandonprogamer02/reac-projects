@@ -31,6 +31,7 @@ const Background = ({ findUserApi, findChatsApi, findChatApi, chats, user }: Glo
             if (tokenValid) {
                 setView(VIEWS.VIEW_LISTA_CHAT.value);
                 const user = await getUserByToken(token);
+                console.log(user._id);
                 findUserApi(user._id);
             }
         })();
