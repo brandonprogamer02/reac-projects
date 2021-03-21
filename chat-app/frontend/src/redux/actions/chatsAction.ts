@@ -1,6 +1,6 @@
 import { GlobalState } from '../types';
 import { ChatsAction, IChats, ChatsDispatch } from '../types/chats';
-import axios from '../../clienteAxios';
+import axios from '../../customAxios';
 
 export const FIND_CHATS_API_SUCESSS = 'FIND_CHATS_API_SUCESSS'
 export const FIND_CHATS_API_STARTED = 'FIND_CHATS_API_STARTED'

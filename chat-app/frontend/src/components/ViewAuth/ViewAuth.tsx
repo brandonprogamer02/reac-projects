@@ -53,7 +53,7 @@ function ViewAuth(props: Props) {
                          const val = await validateUserSign(userInput);
                          setUserValidationSign(val);
                     } else {
-                         const userExists: boolean = await userExistsFetch(userInput);
+                         const userExists: boolean = await userExistsFetch(userInput) as boolean;
                          if (userExists) setUserValidationLog({ bootstrapStyleInput: '', messageError: '' });
                          else setUserValidationLog({ bootstrapStyleInput: 'is-invalid', messageError: 'Este usuario no existe' });
                     }
@@ -114,7 +114,7 @@ function ViewAuth(props: Props) {
           <div className='d-flex justify-content-center align-items-center w-100 vh-100' style={{ backgroundColor: '#F6F6F6' }}>
                <div className="card border p-5" style={{ width: 500 }}>
                     <h2 className='mb-4'>{_crearCuenta ? 'Crear Cuenta' : 'Inicio de Sesion'}</h2>
-                    {/* USERNAME */}
+                    {/* username */}
                     <div className='p-1'>
                          <label className='mr-3'>Usuario</label>
                          <input

@@ -1,5 +1,5 @@
-import axios from '../clienteAxios'
-import { AxiosError } from 'axios'
+import axios from '../customAxios'
+
 export const registerNewUserAndGetToken = async (username: string, password: string) => {
      const body = {
           username,
@@ -10,8 +10,8 @@ export const registerNewUserAndGetToken = async (username: string, password: str
           const res = await axios.post('/sign', body);
           return res.data;
      } catch (error) {
-          const f: AxiosError = error;
-          console.log(f.response?.data)
+          
+          console.log(`Registering new user. Error ${error.response?.data}`);
           return null;
      }
 }
@@ -28,7 +28,7 @@ export const verifyUserCorrect = async (username: string, password: string) => {
           const res = await axios.post('/log', body);
           return res.data;
      } catch (error) {
-          console.log(error.response?.data);
+          console.log(`Verifing user correct. Error ${error.response?.data}`);
           return { token: null };
      }
 }
@@ -40,7 +40,7 @@ export const verifyValidToken = async (token: string) => {
           return res.data.tokenValid;
 
      } catch (error) {
-          console.log(error.response?.data);
+          console.log(`Verifing valid token. Error ${error.response?.data}`);
           return null;
      }
 }

@@ -26,13 +26,18 @@ const Background = ({ findUserApi, findChatsApi, findChatApi, chats, user }: Glo
             // getting token of local storage
             const token = await setTokenLocalStorage() as string;
             // verify if token is valid
-            const tokenValid = await verifyValidToken(token);
-            // if token exists then load the aplication else then load login view
-            if (tokenValid) {
-                setView(VIEWS.VIEW_LISTA_CHAT.value);
-                const user = await getUserByToken(token);
-                console.log(user._id);
-                findUserApi(user._id);
+            if (token) {
+                const tokenValid = await verifyValidToken(token);
+                // if token exists then load the aplication else then load login view
+                if (tokenValid) {
+                    setView(VIEWS.VIEW_LISTA_CHAT.value);
+                    const user = await getUserByToken(token);
+                    // console.log(user);
+                    if (user) {
+
+                        findUserApi(user._id);
+                    }
+                }
             }
         })();
     }, []);
@@ -40,7 +45,7 @@ const Background = ({ findUserApi, findChatsApi, findChatApi, chats, user }: Glo
     useEffect(() => {
         // este efecto es para que cargue los chats despues que cargue el usuario, que el la busqueda de chats depende
         // del usuario
-        if (!user.loading && user.result.userName !== "") findChatsApi();
+        if (!user.loading && user.result.username !== "") findChatsApi();
     }, [user.loading]);
 
     useEffect(() => {
@@ -59,7 +64,7 @@ const Background = ({ findUserApi, findChatsApi, findChatApi, chats, user }: Glo
 
     return (
         <context.Provider value={{ setView, activeChatId, setActiveChatId }}>
-            {(()=> console.log(view))()}
+            {/* {(()=> console.log(view))()} */}
             <div className='container-fluid' style={{ backgroundColor: ' #FCFCFC' }}>
                 <div className="row vh-100">
                     {(view.VIEW_LOGIN.display !== '' && view.VIEW_SIGNIN.display !== '') && <>

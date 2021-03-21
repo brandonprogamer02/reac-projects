@@ -1,5 +1,5 @@
 import { UsersSearchAction, UsersSearchDispatch } from "../../types/usersSearch";
-import axios from '../../../clienteAxios';
+import axios from '../../../customAxios';
 import { GlobalState } from "../../types";
 import IUser from "../../../types/User";
 import { setIndexUserSearchedSelected } from "./setIndexUserSearchedSelected";
@@ -23,7 +23,7 @@ const searchUserApiError = (error: Error): UsersSearchAction => ({
      payload: { error }
 });
 
-export const searchUsersApiByUsername = (username: string) => (dispatch: UsersSearchDispatch, getState: () => GlobalState) => {
+export const searchUsersApiByusername = (username: string) => (dispatch: UsersSearchDispatch, getState: () => GlobalState) => {
      dispatch(searchUserApiStarted());
      // when search it the users the index user put it in -1
      dispatch(setIndexUserSearchedSelected(-1));

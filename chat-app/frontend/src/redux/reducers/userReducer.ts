@@ -9,7 +9,7 @@ const initialState: UserState = {
           active: false,
           contacts: [],
           imageProfile: '',
-          userName: ''
+          username: ''
      }
 }
 function reducer(state = initialState, action: UserAction): UserState {

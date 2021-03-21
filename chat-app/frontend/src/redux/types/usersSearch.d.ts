@@ -27,7 +27,7 @@ interface UsersSearchMapStateToProps {
 }
 
 interface UsersSearchMapDispatchToProps {
-     searchUsersByUsername: (username: string) => void,
+     searchUsersByusername: (username: string) => void,
      setUsersSearchModeActivesSync: (active: boolean) => void,
      setIndexUserSearchedSelected: (index: number) => void
 }

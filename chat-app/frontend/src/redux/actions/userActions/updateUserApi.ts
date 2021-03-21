@@ -1,4 +1,4 @@
-import axiosClient from '../../../clienteAxios';
+import axiosClient from '../../../customAxios';
 import { BodyParam, GlobalState, } from '../../types';
 import { IUser, UserAction, UserDispatch } from '../../types/users'
 

@@ -1,7 +1,7 @@
 import { GlobalState } from '../../types'
 import { ChatAction } from '../../types/chat'
 import { BodyParam } from '../../types'
-import axios from '../../../clienteAxios'
+import axios from '../../../customAxios'
 import { findChatApi } from './findChatApi'
 import { findChatsApi } from '../chatsAction'
 import { reloadChatToServer } from '../../../socket/emitters/index'
@@ -34,14 +34,6 @@ export const updateChatApi = (chatId: string, body: BodyParam) => async (dispatc
                dispatch(findChatApi(chatId));
                dispatch(findChatsApi());
 
-               // getting members id without the own id
-               // const membersId: string[] = []
-               // getState().chat.result.members.forEach(member => {
-               //      if (member._id !== getState().user.result._id) {
-               //           membersId.push(member._id as string);
-               //      }
-               // })
-               // reloadChatToServer(membersId);
           })
           .catch(error => {
                dispatch(updateChatApiError(error));

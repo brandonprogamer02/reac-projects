@@ -1,7 +1,7 @@
 import { model, SchemaTypes, Schema,Document } from 'mongoose'
 
 const UserSchema = new Schema({
-     userName: SchemaTypes.String,
+     username: SchemaTypes.String,
      password: SchemaTypes.String,
      active: SchemaTypes.Boolean,
      contacts: [{
@@ -12,7 +12,7 @@ const UserSchema = new Schema({
 }, { versionKey: false });
 
 export interface IUser {
-    userName: string,
+    username: string,
     password: string,
     active: boolean,
     contacts: string[],

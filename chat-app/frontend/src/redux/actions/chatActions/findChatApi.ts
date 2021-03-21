@@ -1,6 +1,6 @@
 import { GlobalState } from '../../types';
 import { ChatAction, IChat, ChatDispatch } from '../../types/chat';
-import axios from '../../../clienteAxios';
+import axios from '../../../customAxios';
 import { setTokenLocalStorage } from '../../../utils/localStorage';
 
 export const FIND_CHAT_API_SUCESSS = 'FIND_CHAT_API_SUCESSS';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import clienteAxios, { AxiosError } from '../clienteAxios'
+import clienteAxios, { AxiosError } from '../customAxios'
 
 
 function useFetch<T>(url: string, dataStart: T, params?: any,

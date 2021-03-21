@@ -8,6 +8,7 @@ import { setTokenLocalStorage } from '../../utils/localStorage';
 import { useDebounce } from 'use-debounce'
 import { context, VIEWS } from '../Background/BackgroundReducer';
 import { validateUserSign } from './Validation';
+import { IUser } from '../../redux/types/users';
 
 const initialState = { messageError: '', bootstrapStyleInput: '' }
 
@@ -26,7 +27,7 @@ const Login = (props: GlobalState & GlobalDispatch) => {
           (async () => {
                // validacion para que no entre en validateUserSign() cuando cargue por primera vez el componente
                if (userInput !== '') {
-                    const userExists: boolean = await userExistsFetch(userInput);
+                    const userExists: boolean = await userExistsFetch(userInput) as boolean;
                     if (userExists) setUserValidationLog({ bootstrapStyleInput: '', messageError: '' });
                     else setUserValidationLog({ bootstrapStyleInput: 'is-invalid', messageError: 'Este usuario no existe' });
                }
@@ -35,12 +36,23 @@ const Login = (props: GlobalState & GlobalDispatch) => {
      }, [userDebounce]);
 
      useEffect(() => {
+          // validation to do not entry first time
+          if (!props.user.loading && passInput !== '') {
+               // console.log('yo no te puedo hablar');
+               props.findChatsApi();
+          }
+     }, [props.user.loading]);
 
-          if (!props.chat.loading && passToApp) {
-
+     useEffect(() => {
+          // validation to do not entry first time
+          if (!props.chats.loading && passInput !== '') {
+               setPassToApp(true);
+               setPassInput('');
+               setUserInput('');
                setView(VIEWS.VIEW_LISTA_CHAT.value);
           }
-     }, [props.chat.loading]);
+     }, [props.chats.loading]);
+
 
      const submit = async () => {
           // validacion de que tiene que existir el usuario 
@@ -51,11 +63,11 @@ const Login = (props: GlobalState & GlobalDispatch) => {
                     // getting token of local storage
                     setTokenLocalStorage(token);
                     // cargamos data a redux y aplicacion
-                    const user = await getUserByToken(token);
-                    props.findUserApi(user._id);
-                    props.findChatsApi();
-                    setPassToApp(true);
-                    setPassInput('');
+                    const user: IUser = await getUserByToken(token);
+                    console.log(user);
+                    if (user) {
+                         props.findUserApi(user._id as string);
+                    }
                } else {
                     alert('Contrasena incorrecta');
                }
@@ -70,7 +82,7 @@ const Login = (props: GlobalState & GlobalDispatch) => {
           <div className='d-flex justify-content-center align-items-center w-100 vh-100' style={{ backgroundColor: '#F6F6F6' }}>
                <div className="card border p-5" style={{ width: 500 }}>
                     <h2 className='mb-4'>Inicio de Sesion</h2>
-                    {/* USERNAME */}
+                    {/* username */}
                     <div className='p-1'>
                          <label className='mr-3'>Usuario</label>
                          <input

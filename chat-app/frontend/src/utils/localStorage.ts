@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import axiosClient from '../clienteAxios'
+import axiosClient from '../customAxios'
 import IUser from '../types/User'
 
 export const setTokenLocalStorage = async (token?: string) => {

@@ -1,33 +1,36 @@
-import { AxiosResponse } from 'axios'
-import axiosClient from '../clienteAxios'
+import { AxiosError, AxiosResponse } from 'axios'
+import axiosClient from '../customAxios'
 import IChat, { chatExampleObject } from '../types/Chat'
 
-const url = '/chat'
+const url = '/chat';
 
-export function getChats(idUser?: any, callback?: (res: AxiosResponse<IChat[]>) => void): Promise<IChat[]> {
-     const params = {
-          params: {
-               member1: idUser
-          }
-     }
+// export function getChats(idUser?: any, callback?: (res: AxiosResponse<IChat[]>) => void): Promise<IChat[]> {
+//      const params = {
+//           params: {
+//                member1: idUser
+//           }
+//      }
 
-     return axiosClient.get(url, params)
-          .then(res => {
-               callback && callback(res)
-               return res.data
-          })
-          .catch(error => console.log(error))
-}
+//      return axiosClient.get(url, params)
+//           .then(res => {
+//                callback && callback(res)
+//                return res.data
+//           })
+//           .catch(error => {
+//                console.log((error as AxiosError).message);
+//                return null;
+//           })
+// }
 
-export function getChat(chatId?: string, callback?: (res: AxiosResponse<IChat>) => void): Promise<IChat> {
+// export function getChat(chatId?: string, callback?: (res: AxiosResponse<IChat>) => void): Promise<IChat> {
 
-     return axiosClient.get(`${url}/${chatId}`)
-          .then(res => {
-               callback && callback(res)
-               return res.data
-          })
-          .catch(error => console.log(error))
-}
+//      return axiosClient.get(`${url}/${chatId}`)
+//           .then(res => {
+//                callback && callback(res)
+//                return res.data
+//           })
+//           .catch(error => console.log(error))
+// }
 
 export async function insertNewMessage(chatId: string, message: string, authorId: string) {
      const body = {
@@ -38,21 +41,38 @@ export async function insertNewMessage(chatId: string, message: string, authorId
                date: new Date()
           }
      }
-     await axiosClient.put('/chat/' + chatId, body)
+     try {
+
+          await axiosClient.put('/chat/' + chatId, body)
+     } catch (error) {
+          console.log(`Inserting new message. Error ${error.response?.data}`);
+          return { token: null };
+     }
 }
 
-export async function createNewChat(memberId1: string, memberId2: string): Promise<IChat[]> {
+export const createNewChat = async (memberId1: string, memberId2: string) => {
 
      const newChat = {
           ...chatExampleObject, author: memberId1,
           members: [memberId1, memberId2]
      };
+     try {
+          let res = await axiosClient.post('/chat', newChat);
+          return res.data;
+     } catch (error) {
+          console.log(`Creating new chat. Error ${error.response?.data}`);
+          return null;
+     }
 
-     const res = await axiosClient.post('/chat', newChat);
-     return res.data;
 }
 
-export async function deleteChatApi(chatId: string): Promise<IChat[]> {
-     const res = await axiosClient.delete('/chat/' + chatId);
-     return res.data;
+export async function deleteChatApi(chatId: string) {
+     try {
+          const res = await axiosClient.delete('/chat/' + chatId);
+          return res.data;
+
+     } catch (error) {
+          console.log(`Deleting chat. Error ${error.response?.data}`);
+          return null;
+     }
 }

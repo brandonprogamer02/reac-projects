@@ -8,10 +8,10 @@ export interface IUserAuth {
 
 
 export const createUserAndTokenJWT = async (user: IUserAuth) => {
-     
+
      // se crea un nuevo token con los datos del usuario ligados a el
      const userCreated = {
-          userName: user.username,
+          username: user.username,
           password: user.password,
           active: false,
           contacts: [],
@@ -24,7 +24,7 @@ export const createUserAndTokenJWT = async (user: IUserAuth) => {
 }
 export const createTokenJWT = async (user: any) => {
 
-     const filter = { userName: user.username, password: user.password };
+     const filter = { username: user.username, password: user.password };
      const userFinded = await UserModel.findOne(filter);
      // si se encuentra este usuario en la base de datos
      if (userFinded) {
@@ -37,7 +37,7 @@ export const createTokenJWT = async (user: any) => {
 
 
 export const verifyJWT = (token: string | undefined) => {
-     let res: any = { authData: null }
+     let res: { authData: any } = { authData: null }
      if (token !== undefined) {
           try {
                // verificamos si el token que hemos recibido es valido

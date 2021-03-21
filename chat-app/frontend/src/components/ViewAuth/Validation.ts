@@ -13,7 +13,7 @@ export const validateUserSign = async (username: string) => {
           res.messageError = 'La usuario debe tener por lo menos 2 numeros';
           res.bootstrapStyleInput = 'is-invalid';
      }
-     const userExists: boolean = await userExistsFetch(username);
+     const userExists: boolean = await userExistsFetch(username) as boolean;
      if (userExists) {
           res.bootstrapStyleInput = 'is-invalid';
           res.messageError = 'Este nombre de  usuario ya existe';

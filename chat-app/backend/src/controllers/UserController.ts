@@ -9,7 +9,7 @@ export const getUsers: RequestHandler = async (req, res, next) => {
 
      if (username) {
           // find the all documents(users) that contain the username
-          const user = await UserModel.find({ userName: { $regex: username } }, '-password').populate('');
+          const user = await UserModel.find({ username: { $regex: username } }, '-password').populate('');
           if (user.length > 0) {
                res.json(user);
           } else {
@@ -19,9 +19,14 @@ export const getUsers: RequestHandler = async (req, res, next) => {
      } else if (token) {
           const resJWT = verifyJWT(token as string);
           try {
-               const username = resJWT.authData.user.userName;
-               const userNameData = await UserModel.findOne({ userName: username }, '-password');
-               res.json({ user: userNameData });
+               if (resJWT.authData) {
+                    console.log(resJWT.authData);
+                    const username = resJWT.authData.user.username;
+                    const usernameData = await UserModel.findOne({ username: username }, '-password');
+                    res.json({ user: usernameData });
+               } else {
+                    res.status(400).send('token is invalid');
+               }
           } catch (error) {
                res.status(400).send('token is invalid');
           }
@@ -33,8 +38,8 @@ export const getUsers: RequestHandler = async (req, res, next) => {
 }
 
 export const getUser: RequestHandler = async (req, res, next) => {
-
      const id = req.params.id;
+
      try {
           const user = await UserModel.findById(id, '-password').populate('contacts');
           res.json(user);
@@ -43,11 +48,13 @@ export const getUser: RequestHandler = async (req, res, next) => {
           res.status(400).send('the user not found in database by id');
           next();
      }
+
 }
 
 export const insertUser: RequestHandler = async (req, res, next) => {
      const user = req.body;
      // validation for received user
+
      if (!user.username) res.status(400).send('the property "username" has not been provided');
      else if (!user.password) res.status(400).send('the property "password" has not been provided');
      else {
@@ -56,7 +63,7 @@ export const insertUser: RequestHandler = async (req, res, next) => {
                contacts: [],
                imageProfile: '',
                password: user.password,
-               userName: user.username
+               username: user.username
           }
 
           try {
@@ -69,6 +76,7 @@ export const insertUser: RequestHandler = async (req, res, next) => {
                next();
           }
      }
+
 }
 
 export const updateUser: RequestHandler = async (req, res, next) => {
@@ -77,7 +85,7 @@ export const updateUser: RequestHandler = async (req, res, next) => {
      // verify if field exists and if field is correct
      if (field) {
           // verify if the field provides match with any field of Document User
-          if (field === 'contacts' || field === 'userName' || field === 'password' || field === 'active' || field === 'imageProfile') { }
+          if (field === 'contacts' || field === 'username' || field === 'password' || field === 'active' || field === 'imageProfile') { }
           else {
                res.status(400).send(`the field "${field}" provided no match with any field of de document User`);
                return;
@@ -96,8 +104,8 @@ export const updateUser: RequestHandler = async (req, res, next) => {
           console.log('entro');
           let updateObject = {}
           switch (req.body.field) {
-               case "userName":
-                    updateObject = { $set: { userName: req.body.value } };
+               case "username":
+                    updateObject = { $set: { username: req.body.value } };
                     break;
                case "password":
                     updateObject = { $set: { password: req.body.value } };

@@ -60,7 +60,7 @@ const SignIn = (props: GlobalState & GlobalDispatch) => {
           <div className='d-flex justify-content-center align-items-center w-100 vh-100' style={{ backgroundColor: '#F6F6F6' }}>
                <div className="card border p-5" style={{ width: 500 }}>
                     <h2 className='mb-4'>Crear Cuenta</h2>
-                    {/* USERNAME */}
+                    {/* username */}
                     <div className='p-1'>
                          <label className='mr-3'>Usuario</label>
                          <input
