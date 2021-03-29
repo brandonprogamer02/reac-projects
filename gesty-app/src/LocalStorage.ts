@@ -1,4 +1,4 @@
-import { State } from "./redux/types/generalTypes";
+import { State } from "./redux/types";
 
 export type typeMateria = { nombre: string, creditos: number, calificacion: number, id: string, indice: number }
 export type typeDataCuatrimestres = Array<typeDataCuatrimestre>;

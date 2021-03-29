@@ -1,23 +1,32 @@
-import React, { useState, useEffect, useReducer } from 'react'
-import Cuatrimestre from '../Cuatrimestre/Cuatrimestre'
-import { DivMainContainer, DivParentContainer, DivCuatrimestres, LabelPromedioHistorico, ButtonNuevoCuatrimestre, Titulo, GlobalStyles } from './MainComponentStyled'
-import { typeDataCuatrimestre } from '../../LocalStorage'
-import { mapStateToProps, mapDispatchToProps } from '../../redux/maps/cuatrimestre.map'
-import { connect } from 'react-redux'
-import { Props } from '../../redux/types/generalTypes'
-import { getLocalStorage } from '../../LocalStorage'
+import React, { useState, useEffect } from 'react';
+import Cuatrimestre from '../Cuatrimestre/Cuatrimestre';
+import { DivMainContainer, DivParentContainer, DivCuatrimestres, LabelPromedioHistorico, ButtonNuevoCuatrimestre, Titulo, GlobalStyles } from './MainComponentStyled';
+import { typeDataCuatrimestre } from '../../LocalStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLocalStorage } from '../../LocalStorage';
+import { } from '../../redux/actions/materiaSeleccionado.action';
+import { addCuatrimestre, replaceCuatrimestres } from '../../redux/actions/cuatrimestre.action';
+import { replaceMateriaSeleccionado } from '../../redux/actions/materiaSeleccionado.action';
+import { State } from '../../redux/types';
+import apiMateria from '../../ApiMaterias';
 
-const MainComponent = (props: Props) => {
-   const { addCuatrimestre, cuatrimestres, replaceCuatrimestres } = props
-   const [promedioHistorico, setPromedioHistorico] = useState(0)
+const MainComponent = () => {
+   const dispatch = useDispatch();
+   const cuatrimestres = useSelector((state: State) => state.cuatrimestres);
+   const [promedioHistorico, setPromedioHistorico] = useState(0);
 
-   useEffect(() => setPromedioHistorico(getPromedioHistorico()))
+   useEffect(() => setPromedioHistorico(getPromedioHistorico()));
 
    useEffect(() => {
       // aqui cargamos la data del local storage
-      const data = getLocalStorage().cuatrimestres
-      replaceCuatrimestres(data ? data : [[]])
-   }, [])
+      const cuatrimestresData = getLocalStorage().cuatrimestres;
+      const materiaRenderizado = getLocalStorage().materiaRenderizado;
+
+      cuatrimestresData && dispatch(replaceCuatrimestres(cuatrimestresData));
+      materiaRenderizado.length !== 0 && dispatch(replaceMateriaSeleccionado(materiaRenderizado));
+
+
+   }, []);
 
    const getPromedioHistorico = () => {
       let notaParcial = 0;
@@ -34,18 +43,16 @@ const MainComponent = (props: Props) => {
             cantidadCreditos += materia.creditos;
          })
       })
-      const resultado = notaParcial / cantidadCreditos
-      return Number(resultado.toFixed(2))
+      const resultado = notaParcial / cantidadCreditos;
+      return Number(resultado.toFixed(2));
    };
 
    const nuevoCuatrimestre = () => {
       const newCuatrimestre: typeDataCuatrimestre = []
-      addCuatrimestre(newCuatrimestre)
-   }
-
+      dispatch(addCuatrimestre(newCuatrimestre));
+   };
 
    return (
-
       <DivParentContainer>
          <div className="container-fluid  vh-100 d-flex">
             <GlobalStyles />
@@ -53,7 +60,6 @@ const MainComponent = (props: Props) => {
                <Titulo>Gesty App - Brandox</Titulo>
                <DivCuatrimestres>
                   {cuatrimestres.map((element, index) => (
-
                      <Cuatrimestre key={index} indice={index} />
                   ))}
                   <ButtonNuevoCuatrimestre onClick={nuevoCuatrimestre} >
@@ -62,12 +68,9 @@ const MainComponent = (props: Props) => {
                </DivCuatrimestres>
                <LabelPromedioHistorico> Tu Promedio Historico es de {promedioHistorico} </LabelPromedioHistorico>
             </DivMainContainer>
-
          </div>
       </DivParentContainer>
-
-
    )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainComponent)
+export default MainComponent;

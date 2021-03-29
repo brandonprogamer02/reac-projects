@@ -1,13 +1,15 @@
-import { typeDataCuatrimestre, typeDataCuatrimestres, typeMateria } from '../../LocalStorage'
-import { _CuatrimestreAction, MateriaAction, CuatrimestreAction } from '../types/cuatrimestre'
+import { typeApiMateria } from '../../ApiMaterias';
+import { typeDataCuatrimestre, typeDataCuatrimestres, typeMateria } from '../../LocalStorage';
+import { generateId } from '../../utils';
+import { _CuatrimestreAction, CuatrimestreAction, MateriaAction } from '../types';
 
 // CONSTANTS
-export const ADD_CUATRIMESTRE = 'ADD_CUATRIMESTRE'
-export const DELETE_CUATRIMESTRE = 'DELETE_CUATRIMESTRE'
-export const REPLACE_CUATRIMESTRES = 'REPLACE_CUATRIMESTRES'
-export const ADD_MATERIA = 'ADD_MATERIA'
-export const DELETE_MATERIA = 'DELETE_MATERIA'
-export const UPDATE_MATERIA = 'UPDATE_MATERIA'
+export const ADD_CUATRIMESTRE = 'ADD_CUATRIMESTRE';
+export const DELETE_CUATRIMESTRE = 'DELETE_CUATRIMESTRE';
+export const REPLACE_CUATRIMESTRES = 'REPLACE_CUATRIMESTRES';
+export const ADD_MATERIA = 'ADD_MATERIA';
+export const DELETE_MATERIA = 'DELETE_MATERIA';
+export const UPDATE_MATERIA = 'UPDATE_MATERIA';
 
 //--------------------------------------------------------------------------------------------------------------------------------------
 
@@ -15,7 +17,7 @@ const defaultActionCuatrimestre: _CuatrimestreAction = { cuatrimestre: [], cuatr
 
 const defaultActionMateria: MateriaAction = {
     indiceCuatrimestre: 0, indiceMateria: 0,
-    materia: { calificacion: 0, creditos: 0, nombre: '' , id: '', indice: 0 }
+    materia: { creditos: 0, nombre: '', calificacion: 0, id: generateId(), indice: 0 }
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------

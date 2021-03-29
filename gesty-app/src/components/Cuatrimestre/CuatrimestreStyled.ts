@@ -37,7 +37,7 @@ export const SelectMateria = styled.select`
 
 export const InputCalificacion = styled.input.attrs({ type: 'number' })`
    display:inline-block;
-   width: 37px;
+   width: 60px;
    padding: 6px;
 `
 export const Button = styled.button`
@@ -56,6 +56,9 @@ export const BotonCerrarMateria = styled(Button).attrs({
 })`
    background-color: red;
    text-align: center;
+   position: absolute;
+   top: calc(50% - 10px);
+   right: 0px;
    padding: 0px 3px;
    font-size: medium;
    display:none;
@@ -79,7 +82,7 @@ export const DivTituloContainer = styled.div`
    
 
 `
-export const TrMateriaPadre = styled.tr`
+export const TrMateriaPadre = styled.tr.attrs({ className: '' })`
    :hover{
       .cerrar{
       display: inline-block;

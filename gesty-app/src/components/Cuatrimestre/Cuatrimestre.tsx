@@ -1,25 +1,27 @@
-import React, { useEffect, useReducer, useState, useContext } from 'react'
-import { connect } from 'react-redux'
-import { DivParentContainer, DivTable, Button, DivTituloContainer, TableMaterias, LabelPromedioCuatrimestral, BotonCerrarCuatrimestre } from './CuatrimestreStyled'
-import Materia from './Materia'
-import { IPropsCuatrimestre } from './types'
-import { typeMateria } from '../../LocalStorage'
-import { mapStateToProps, mapDispatchToProps } from '../../redux/maps/cuatrimestre.map'
-import { generateId } from '../../utils'
-
+import React, { useEffect, useState } from 'react';
+import { DivParentContainer, DivTable, Button, DivTituloContainer, TableMaterias, LabelPromedioCuatrimestral, BotonCerrarCuatrimestre } from './CuatrimestreStyled';
+import Materia from './Materia';
+import { IPropsCuatrimestre } from './types';
+import { typeMateria } from '../../LocalStorage';
+import { generateId } from '../../utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { State } from '../../redux/types';
+import { addMateria, deleteCuatrimestre } from '../../redux/actions/cuatrimestre.action';
+import { borrarMateriaSeleccionado, nuevaMateriaSeleccionado } from '../../redux/actions/materiaSeleccionado.action';
 
 const Cuatrimestre = (props: IPropsCuatrimestre) => {
-   const { indice, deleteCuatrimestre, addMateria, cuatrimestres } = props
-   const cuatrimestre = cuatrimestres[indice]
+
+   const dispatch = useDispatch();
+   const cuatrimestre = useSelector((state: State) => state.cuatrimestres[props.indice]);
    const [promedioCuatrimestral, setPromedioCuatrimestral] = useState(0);
 
    useEffect(() => {
-      calcularPromedio()
+      calcularPromedio();
    });
 
    const _addMateria = () => {
-      const nuevaMateria: typeMateria = { calificacion: 0, creditos: 0, nombre: '', id: generateId(), indice: 0 }
-      addMateria(indice, nuevaMateria)
+      const nuevaMateria: typeMateria = { calificacion: 0, creditos: 0, nombre: '', id: generateId(), indice: 0 };
+      dispatch(addMateria(props.indice, nuevaMateria));
    };
 
    const calcularPromedio = () => {
@@ -37,22 +39,30 @@ const Cuatrimestre = (props: IPropsCuatrimestre) => {
          cantidadCreditos += creditos;
       });
 
-      const resultado = notaParcial / cantidadCreditos
+      const resultado = notaParcial / cantidadCreditos;
       setPromedioCuatrimestral(Number(resultado.toFixed(2)))
    };
 
    const handlerEliminarCuatrimestre = () => {
-      deleteCuatrimestre(indice)
+      cuatrimestre.forEach(el => {
+         console.log(el.nombre);
+         if (el.nombre !== '') {
+            dispatch(borrarMateriaSeleccionado({ creditos: el.creditos, materia: el.nombre }));
+         }
+      });
+      dispatch(deleteCuatrimestre(props.indice));
+
+
    };
 
    return (
       <DivParentContainer>
          <DivTituloContainer>
-            <label>Cuatrimestre {indice + 1}</label>
+            <label>Cuatrimestre {props.indice + 1}</label>
             <div>
                <Button onClick={_addMateria} className='badge  text-wrap '
                >Nueva Materia</Button>
-               <BotonCerrarCuatrimestre onClick={handlerEliminarCuatrimestre} >X</BotonCerrarCuatrimestre>
+               <BotonCerrarCuatrimestre onClick={handlerEliminarCuatrimestre}>X</BotonCerrarCuatrimestre>
             </div>
          </DivTituloContainer>
          <DivTable>
@@ -65,7 +75,7 @@ const Cuatrimestre = (props: IPropsCuatrimestre) => {
                   </tr>
                </thead>
                <tbody>
-                  {cuatrimestre.map((element, index) => (<Materia indice={index} key={index} indiceCuatrimestre={indice} dataMateria={cuatrimestre[index]} />))}
+                  {cuatrimestre.map((element, index) => (<Materia indice={index} key={index} indiceCuatrimestre={props.indice} dataMateria={cuatrimestre[index]} />))}
                </tbody>
             </TableMaterias>
          </DivTable>
@@ -75,4 +85,4 @@ const Cuatrimestre = (props: IPropsCuatrimestre) => {
    )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cuatrimestre) 
+export default Cuatrimestre;

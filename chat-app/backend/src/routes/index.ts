@@ -10,6 +10,7 @@ export function routes() {
     // loading all routes
     app.get('/', (res, req) => {
         req.send('Estas Home')
+        
     });
     // home
     app.use(

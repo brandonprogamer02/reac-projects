@@ -1,0 +1,4 @@
+to tester a few the calculation of the average
+
+
+to permiss delete a subject with value Selecciona Tu Materia
